@@ -1,0 +1,24 @@
+web:
+    image: wordpress
+    links:
+     - mysql
+    environment:
+     - WORDPRESS_DB_PASSWORD=password
+    ports:
+     - "blowfish.web:8080:80"
+    volumes:
+     - "/Users/lucho/tooit/repositories/git.tooit.com/blowfish.web/wordpress:/var/www/html"
+mysql:
+    image: mysql:5.7
+    environment:
+     - MYSQL_ROOT_PASSWORD=password
+     - MYSQL_DATABASE=wordpress
+phpmyadmin:
+  image: phpmyadmin/phpmyadmin
+  links:
+    - mysql
+  environment:
+    PMA_HOST: mysql
+    PMA_PORT: 3306
+  ports:
+    - "blowfish.phpmyadmin:8081:80"
